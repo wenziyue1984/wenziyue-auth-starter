@@ -12,7 +12,7 @@
         <java.version>1.8</java.version>
         <spring-boot.version>2.7.18</spring-boot.version>
         <lombok.version>1.18.30</lombok.version>
-        <auth-core.version>1.0.9</auth-core.version>
+        <auth-core.version>1.0.11</auth-core.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
