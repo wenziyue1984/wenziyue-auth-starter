@@ -6,35 +6,41 @@
 
     <groupId>com.wenziyue</groupId>
     <artifactId>wenziyue-auth-starter</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-boot.version>2.7.18</spring-boot.version>
-        <lombok.version>1.18.30</lombok.version>
-        <auth-core.version>1.0.17</auth-core.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.wenziyue</groupId>
+                <artifactId>wenziyue-bom</artifactId>
+                <version>1.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring-boot.version}</version>
         </dependency>
 
         <!-- Spring Boot Starter Web (用于创建 Web 应用) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
         </dependency>
 
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -42,7 +48,6 @@
         <dependency>
             <groupId>com.wenziyue</groupId>
             <artifactId>wenziyue-auth-core</artifactId>
-            <version>${auth-core.version}</version>
         </dependency>
     </dependencies>
 
