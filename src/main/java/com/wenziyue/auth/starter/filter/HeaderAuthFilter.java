@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -32,12 +33,7 @@ public class HeaderAuthFilter extends OncePerRequestFilter {
                 LoginUser loginUser = HeaderUtils.parseUserInfoFromHeader(userInfoHeader);
 
                 if (loginUser != null && StringUtils.hasText(loginUser.getUserId())) {
-                    var authorities = loginUser.getRoles() == null
-                            ? Collections.<SimpleGrantedAuthority>emptyList()
-                            : loginUser.getRoles().stream()
-                            .filter(StringUtils::hasText)
-                            .map(SimpleGrantedAuthority::new)
-                            .collect(Collectors.toList());
+                    List<SimpleGrantedAuthority> authorities = buildAuthorities(loginUser.getRoles());
 
                     var authentication = new UsernamePasswordAuthenticationToken(loginUser, null, authorities);
 
@@ -50,5 +46,12 @@ public class HeaderAuthFilter extends OncePerRequestFilter {
         } finally {
             SecurityContextHolder.clearContext();
         }
+    }
+
+    private List<SimpleGrantedAuthority> buildAuthorities(String role) {
+        if (!StringUtils.hasText(role)) {
+            return Collections.emptyList();
+        }
+        return Collections.singletonList(new SimpleGrantedAuthority(role));
     }
 }
